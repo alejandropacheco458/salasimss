@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Solicitud Reservar Sala</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list lines="full">
+      <ion-item *ngIf="solicitud">
+        <ion-label>Fecha:</ion-label>
+        <ion-input required tupe="text" placeholder="Fecha" [(ngModel)]="solicitud.fecha"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="solicitud">
+        <ion-label>Sala:</ion-label>
+        <ion-input required tupe="text" placeholder="Sala" [(ngModel)]="solicitud.espacio"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="solicitud">
+        <ion-label>Nombre:</ion-label>
+        <ion-input required tupe="text" placeholder="Nombre" [(ngModel)]="solicitud.nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora inicio:</ion-label>
+        <ion-datetime displayFormat="HH:mm" placeholder="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora termino:</ion-label>
+        <ion-datetime displayFormat="HH:mm" placeholder="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
+      </ion-item>
+  </ion-list>
+  <ion-button expand="full" color="success" (click)="validateSolicitud()">Guardar</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  </ion-fab>
+</ion-content>
+

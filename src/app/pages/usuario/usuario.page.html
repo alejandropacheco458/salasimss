@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list lines="full">
+      <ion-item *ngIf="usuario">
+        <ion-input required tupe="text" placeholder="Usuario" [(ngModel)]="usuario.nombre"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="usuario">
+        <ion-input required tupe="text" placeholder="apellido" [(ngModel)]="usuario.apellido"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="usuario">
+        <ion-input required tupe="text" placeholder="email" [(ngModel)]="usuario.email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="usuario">
+        <ion-input required tupe="text" placeholder="curp" [(ngModel)]="usuario.curp"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="usuario">
+        <ion-input required tupe="text" placeholder="numeroControl" [(ngModel)]="usuario.numeroControl"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estatus</ion-label>
+        <ion-select  value="1" [(ngModel)]="usuario.status">
+          <ion-select-option value="1">Activo</ion-select-option>
+          <ion-select-option value="2">Inactivo</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="saveUsuario()">Save</ion-button>
+</ion-content>

@@ -1,20 +1,21 @@
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthService } from './../services/auth.service';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-home-usuario',
+  templateUrl: './home-usuario.page.html',
+  styleUrls: ['./home-usuario.page.scss'],
 })
-export class HomePage {
+export class HomeUsuarioPage implements OnInit {
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private afAuth: AngularFireAuth
-  ) {}
+  ) { }
+
+  ngOnInit() {
+  }
 
   onLogout(){
     console.log("Logout!");

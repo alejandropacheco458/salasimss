@@ -1,0 +1,22 @@
+<ion-header size="large">
+  <ion-toolbar color="secondary">
+    <ion-title>Reservar Salas IMSS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>
+      Email
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Password
+    </ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+    <ion-button expand="full" (click)="onLogin()">Login</ion-button>
+    <ion-button expand="full" color="success" routerLink="/register">Registrarse</ion-button>
+</ion-content>
