@@ -28,14 +28,14 @@ export class LoginPage implements OnInit {
   }
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private usuarioService: UsuarioService,
-    private afAuth: AngularFireAuth,
-    public alertController: AlertController
+    private authService: AuthService,       // Firebase App Server and DB  -> AngularFireAuth
+    private router: Router,                 // Enrrutador para las paginas adelante atras etc 
+    private usuarioService: UsuarioService, // Control de usuarios en aplicacion 
+    private afAuth: AngularFireAuth,        // Recibe respuesta de AuthService
+    public alertController: AlertController // Manejo de alertas
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { // Primer metodo que se ejecuta al iniciar una pagina
   }
 
   onLogin(){
