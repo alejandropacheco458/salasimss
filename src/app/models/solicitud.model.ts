@@ -8,4 +8,6 @@ export interface Solicitud {
   inicio: string;
   termino: string;
   estatus: number;
+  proposito: string;
+  materiales: string;
 }

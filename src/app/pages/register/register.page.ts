@@ -1,5 +1,5 @@
 import { UsuarioService } from './../../services/usuario.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Usuario } from './../../models/usuario.model';
 import { User } from './../../models/user.model';
 import { AuthService } from './../../services/auth.service';
@@ -33,7 +33,8 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     private usuarioService: UsuarioService,
     private nav: NavController,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -59,13 +60,14 @@ export class RegisterPage implements OnInit {
           console.log("User ID: "+user.uid);
 
 
-
+          this.usuario.id = user.uid;
           this.usuarioService.addUsuario(user.uid,this.usuario).then(() => {
             loading.dismiss();
           });
 
           console.log('Exito se guardo nuevo usuario en tabla usuario');
-          this.router.navigateByUrl('/home-usuario');
+          this.presentAlert();
+          this.router.navigateByUrl('/login');
           ///this.usuarioId = user.uid;
           //this.loadUsuario();
         }
@@ -76,6 +78,17 @@ export class RegisterPage implements OnInit {
 
 
     }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Usuario',
+      subHeader: 'Usuario Inactivo',
+      message: 'El usuario se registro con exito, favor de contactar con el administrador para habilitar su acceso.',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

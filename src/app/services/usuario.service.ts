@@ -10,6 +10,7 @@ export class UsuarioService {
   usuarioDoc: AngularFirestoreDocument<Usuario>;
   usuarios: Observable<Usuario[]>;
   usuario: Observable<Usuario>;
+  usuarioValidate: Usuario;
 
   constructor (
     private db: AngularFirestore
@@ -36,6 +37,12 @@ export class UsuarioService {
   getUsuario(id: string){
     console.log("busca usuario por id: "+id);
     return this.usuariosCollection.doc<Usuario>(id).valueChanges();
+  }
+
+
+  getUsuarioId(id: string) {
+    console.log("hola 22");
+    return this.db.collection('usuarios').ref.where('id','==',id);
   }
 
   updateUsuario(usuario: Usuario, id: string) {

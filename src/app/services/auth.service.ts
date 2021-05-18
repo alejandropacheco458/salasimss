@@ -32,4 +32,9 @@ export class AuthService {
       console.log("Error on Register: ", error);
     }
   }
+
+  // Devuelve la session
+ get Session(){
+  return this.afAuth.authState;
+ }
 }

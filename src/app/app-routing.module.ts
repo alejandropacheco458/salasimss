@@ -52,10 +52,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'solicitud/:fecha/:salaId',
+    path: 'solicitud/:fecha/:salaId/:solicitudId',
     loadChildren: () => import('./pages/solicitud/solicitud.module').then( m => m.SolicitudPageModule),
     canActivate: [AuthGuard]
-  },
+  }
 ];
 
 @NgModule({

@@ -7,25 +7,32 @@
 <ion-content [fullscreen]="true">
   <ion-list lines="full">
     <ion-item *ngIf="usuario">
-      <ion-input required tupe="text" placeholder="nombre" [(ngModel)]="usuario.nombre"></ion-input>
+      <ion-label>Nombre</ion-label>
+      <ion-input required type="text" [(ngModel)]="usuario.nombre"></ion-input>
     </ion-item>
     <ion-item *ngIf="usuario">
-      <ion-input required tupe="text" placeholder="apellido" [(ngModel)]="usuario.apellido"></ion-input>
+      <ion-label>Apellido</ion-label>
+      <ion-input required type="text" [(ngModel)]="usuario.apellido"></ion-input>
     </ion-item>
     <ion-item *ngIf="usuario">
-      <ion-input required tupe="text" placeholder="curp" [(ngModel)]="usuario.curp"></ion-input>
+      <ion-label>CURP</ion-label>
+      <ion-input required type="text" [(ngModel)]="usuario.curp"></ion-input>
     </ion-item>
     <ion-item *ngIf="usuario">
-      <ion-input required tupe="text" placeholder="numeroControl" [(ngModel)]="usuario.numeroControl"></ion-input>
+      <ion-label>Numero IMSS</ion-label>
+      <ion-input required type="text" [(ngModel)]="usuario.numeroControl"></ion-input>
     </ion-item>
     <ion-item *ngIf="usuario">
-      <ion-input required tupe="text" placeholder="email" [(ngModel)]="usuario.email"></ion-input>
+      <ion-label>Email</ion-label>
+      <ion-input required type="text" [(ngModel)]="usuario.email"></ion-input>
     </ion-item>
     <ion-item >
-      <ion-input required tupe="text" placeholder="confirmar email" [(ngModel)]="user.email"></ion-input>
+      <ion-label>Confirmar Email</ion-label>
+      <ion-input required type="text" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item >
-      <ion-input required tupe="password" placeholder="password" [(ngModel)]="user.password"></ion-input>
+      <ion-label>Password</ion-label>
+      <ion-input required type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   </ion-list>
     <ion-button expand="full" color="success" (click)="onRegister()">Gurdar</ion-button>

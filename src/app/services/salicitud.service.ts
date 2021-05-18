@@ -35,40 +35,16 @@ export class SalicitudService {
     );
   }
 
-  getSolicitudesByFechaAndSalaAndTime(fecha: string, salaId: string, inicio: string, termino: string): Observable<Solicitud[]> {
-    this.solicitudesCollection = this.db.collection('solicitudes',ref => ref.where('fecha','==',fecha)
-                                                                            .where('sala','==',salaId)
-                                                                            .where('inicio','>',inicio)
-                                                                            .where('inicio','<',termino));
-    return this.solicitudes = this.solicitudesCollection.snapshotChanges().pipe(
-      map ( cambios => {
-        return cambios.map( accion => {
-          const datos = accion.payload.doc.data() as Solicitud;
-          datos.id = accion.payload.doc.id;
-          return datos;
-        });
-      })
-    );
-  }
-
-  getSolicitudesByFechaAndSalaAndTimeTermino(fecha: string, salaId: string, inicio: string, termino: string): Observable<Solicitud[]> {
-    this.solicitudesCollection = this.db.collection('solicitudes',ref => ref.where('fecha','==',fecha)
-                                                                            .where('sala','==',salaId)
-                                                                            .where('termino','>',inicio)
-                                                                            .where('termino','<',termino));
-    return this.solicitudes = this.solicitudesCollection.snapshotChanges().pipe(
-      map ( cambios => {
-        return cambios.map( accion => {
-          const datos = accion.payload.doc.data() as Solicitud;
-          datos.id = accion.payload.doc.id;
-          return datos;
-        });
-      })
-    );
-  }
-
   addSolicitud(solicitud: Solicitud) {
     return this.solicitudesCollection.add(solicitud);
+  }
+
+  updateSolicitud(usuario: Solicitud, id: string) {
+    return this.solicitudesCollection.doc(id).update(usuario);
+  }
+
+  deleteSolicitud(id: string) {
+    return this.solicitudesCollection.doc(id);
   }
 
 

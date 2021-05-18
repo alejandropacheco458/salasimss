@@ -31,15 +31,17 @@
   <ion-button expand="full" (click)="onFindSolicitudes()">Buscar Disponibilidad</ion-button>
   <ion-list>
     <ion-item-sliding *ngFor="let solicitud of solicitudes">
-      <ion-item lines="inset" button [routerLink]="['/usuario', solicitud.id]">
+      <ion-item lines="inset" [routerLink]="['/solicitud', fecha, sala.id, solicitud.id]">
         <ion-label>
-          {{ solicitud.inicio+' - '+solicitud.termino+'      '+ solicitud.nombre}}
+          <h2>{{ solicitud.inicio+" - "+solicitud.termino }}</h2>
+          <h3>{{ solicitud.nombre }}</h3>
+          <p>{{ solicitud.proposito }}</p>
         </ion-label>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success"  [routerLink]="['/solicitud', fecha, sala.id]" routerDirection="forward">
+    <ion-fab-button color="success"  [routerLink]="['/solicitud', fecha, sala.id, '']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

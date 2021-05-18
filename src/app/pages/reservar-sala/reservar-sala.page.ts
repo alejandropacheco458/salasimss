@@ -4,6 +4,7 @@ import { Sala } from './../../models/sala.model';
 import { SalaService } from './../../services/sala.service';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-reservar-sala',
@@ -15,6 +16,7 @@ export class ReservarSalaPage implements OnInit {
   fecha: Date = new Date();
   fechaSolicitud: string;
   sala: Sala = new Sala();
+  usuarioId = null;
 
   salas: Sala[];
   solicitudes: Solicitud[];
@@ -22,7 +24,8 @@ export class ReservarSalaPage implements OnInit {
   constructor(
     private salaService: SalaService,
     private solicitudesService: SalicitudService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
@@ -30,7 +33,16 @@ export class ReservarSalaPage implements OnInit {
       salas => {
         this.salas = salas;
       }
-    )
+    );
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        console.log("User ID: "+user.uid);
+        this.usuarioId = user.uid;
+      }
+      else{
+
+      }
+   });
   }
 
   onFindSolicitudes(){

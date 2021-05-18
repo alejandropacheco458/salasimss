@@ -12,19 +12,24 @@
 <ion-content padding>
   <ion-list lines="full">
       <ion-item *ngIf="usuario">
-        <ion-input required tupe="text" placeholder="Usuario" [(ngModel)]="usuario.nombre"></ion-input>
+        <ion-label>Nombre</ion-label>
+        <ion-input required type="text" placeholder="Usuario" [(ngModel)]="usuario.nombre"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-input required tupe="text" placeholder="apellido" [(ngModel)]="usuario.apellido"></ion-input>
+        <ion-label>Apellido</ion-label>
+        <ion-input required type="text" placeholder="apellido" [(ngModel)]="usuario.apellido"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-input required tupe="text" placeholder="email" [(ngModel)]="usuario.email"></ion-input>
+        <ion-label>Email</ion-label>
+        <ion-input required disabled type="text" placeholder="email" [(ngModel)]="usuario.email"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-input required tupe="text" placeholder="curp" [(ngModel)]="usuario.curp"></ion-input>
+        <ion-label>CURP</ion-label>
+        <ion-input required type="text" placeholder="CURP" [(ngModel)]="usuario.curp"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-input required tupe="text" placeholder="numeroControl" [(ngModel)]="usuario.numeroControl"></ion-input>
+        <ion-label>Numero IMSS</ion-label>
+        <ion-input required type="text" placeholder="numero IMSS" [(ngModel)]="usuario.numeroControl"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Estatus</ion-label>
