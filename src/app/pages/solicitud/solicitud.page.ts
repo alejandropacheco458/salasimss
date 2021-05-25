@@ -157,9 +157,11 @@ export class SolicitudPage implements OnInit {
 
   validateSolicitud() {
     console.log("Validar horas i");
-    this.solicitud.inicio = this.horaInicio.getHours().toString()+":"+this.horaInicio.getMinutes().toString();
-    this.solicitud.termino = this.horaTermino.getHours().toString()+":"+this.horaTermino.getMinutes().toString();
+    this.solicitud.inicio = this.horaInicio.toString();
+    this.solicitud.termino = this.horaTermino.toString();
     this.solicitud.fecha = this.fecha;
+    console.log("Validar horas i: "+this.solicitud.inicio);
+    console.log("Validar horas t: "+this.solicitud.termino);
     var horasInicio = this.db.collection('solicitudes').ref.where('fecha','==',this.solicitud.fecha)
                                                            .where('sala','==',this.solicitud.sala)
                                                            .where('estatus','==',1)
