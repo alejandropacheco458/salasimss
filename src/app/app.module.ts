@@ -13,6 +13,8 @@ import { AngularFireModule } from '@angular/fire/';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DatePipe } from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firestore,'reservar-salas'),
     AngularFirestoreModule,
+    HttpClientModule,
+    PipesModule,
     AngularFireAuthModule
   ],
   providers: [DatePipe, UsuarioService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

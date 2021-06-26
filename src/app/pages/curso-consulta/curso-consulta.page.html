@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Material del curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list lines="full">
+      <ion-item *ngIf="curso">
+        <ion-label><b>Nombre:</b></ion-label>
+        <ion-input required type="text" [(ngModel)]="curso.nombre"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="curso">
+        <ion-label><b>Descripcion:</b></ion-label>
+        <ion-textarea required type="text" [(ngModel)]="curso.descripcion"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Liga de materiales:</b></ion-label>
+        <ion-textarea  [(ngModel)]="curso.liga"></ion-textarea>
+      </ion-item>
+  </ion-list>
+</ion-content>

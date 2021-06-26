@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class UsuariosPage implements OnInit {
 
   usuarios: Usuario[];
+  texto = '';
 
   constructor(private usuariosService: UsuarioService) { }
 
@@ -20,6 +21,10 @@ export class UsuariosPage implements OnInit {
         this.usuarios = usuarios;
       }
     )
+  }
+
+  buscar( event ){
+    this.texto = event.detail.value;
   }
 
 

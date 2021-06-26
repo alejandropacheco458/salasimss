@@ -35,6 +35,19 @@ export class SalicitudService {
     );
   }
 
+  getSolicitudes(): Observable<Solicitud[]> {
+    this.solicitudesCollection = this.db.collection('solicitudes',ref => ref.orderBy('fecha','asc'));
+    return this.solicitudes = this.solicitudesCollection.snapshotChanges().pipe(
+      map ( cambios => {
+        return cambios.map( accion => {
+          const datos = accion.payload.doc.data() as Solicitud;
+          datos.id = accion.payload.doc.id;
+          return datos;
+        });
+      })
+    );
+  }
+
   addSolicitud(solicitud: Solicitud) {
     return this.solicitudesCollection.add(solicitud);
   }

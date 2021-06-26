@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de la Sala</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list lines="full">
+      <ion-item *ngIf="sala">
+        <ion-label><b>Nombre:</b></ion-label>
+        <ion-input required type="text" placeholder="Usuario" [(ngModel)]="sala.nombre"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="sala">
+        <ion-label><b>Capacidad:</b></ion-label>
+        <ion-input required type="text" placeholder="capacidad" [(ngModel)]="sala.capacidad"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Hora inicio:</b></ion-label>
+        <ion-datetime displayFormat="HH:mm" minuteValues="0" placeholder="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Hora termino:</b></ion-label>
+        <ion-datetime displayFormat="HH:mm" minuteValues="0" placeholder="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Estatus:</b></ion-label>
+        <ion-select  value="1" [(ngModel)]="sala.estatus">
+          <ion-select-option value="1">Activo</ion-select-option>
+          <ion-select-option value="2">Inactivo</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>¿Requiere Autorización?:</b></ion-label>
+        <ion-select  value="1" [(ngModel)]="sala.autorizacion">
+          <ion-select-option value="1">Si</ion-select-option>
+          <ion-select-option value="2">No</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="saveSala()">Save</ion-button>
+</ion-content>

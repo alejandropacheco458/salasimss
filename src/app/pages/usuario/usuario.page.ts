@@ -1,7 +1,7 @@
 import { UsuarioService } from './../../services/usuario.service';
 import { Usuario } from './../../models/usuario.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 
 @Component({
@@ -23,16 +23,19 @@ export class UsuarioPage implements OnInit {
   }
 
   usuarioId = null;
+  vista = null;
 
   constructor(
     private route: ActivatedRoute,
     private nav: NavController,
+    private router: Router,
     private usuarioService: UsuarioService,
     private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
     this.usuarioId = this.route.snapshot.params['id'];
+    this.vista = this.route.snapshot.params['vista'];
     if (this.usuarioId) {
       this.loadUsuario();
     }
@@ -58,7 +61,8 @@ export class UsuarioPage implements OnInit {
       //
       this.usuarioService.updateUsuario(this.usuario, this.usuarioId).then(() => {
       loading.dismiss();
-      this.nav.navigateForward('/usuarios');
+      this.onValidarVista();
+      //this.nav.navigateForward('/usuarios');
       })
     } else {
       /*this.usuarioService.addUsuario(this.usuario).then(() => {
@@ -66,6 +70,16 @@ export class UsuarioPage implements OnInit {
       this.nav.navigateForward('/usuarios');
       })*/
     }
+  }
+
+  onValidarVista() {
+
+    if (this.vista === '1') {
+      this.router.navigate(['/usuarios']);
+    } else {
+      this.router.navigate(['/usuarios-autorizar']);
+    }
+
   }
 
   onRemove(idUsuario: string) {

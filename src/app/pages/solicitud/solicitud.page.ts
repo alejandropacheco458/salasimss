@@ -31,8 +31,13 @@ export class SolicitudPage implements OnInit {
     rol: 2
   }
 
-  horaInicio: Date = new Date();
-  horaTermino: Date = new Date();
+  horaInicio: any;
+  horaTermino: any;
+
+  fechaValidate: Date;
+
+  inicio: string;
+  termino: string;
 
   solicitud: Solicitud= {
     id: '',
@@ -43,21 +48,23 @@ export class SolicitudPage implements OnInit {
     fecha: '',
     inicio: '',
     termino: '',
-    estatus: 1,
+    estatus: '1',
     proposito: '',
-    materiales: ''
+    materiales: '',
+    observaciones: ''
   };
 
   sala: Sala = new Sala();
 
   fecha: string;
-  fechaValidate: string;
   salaId: string;
   solicitudId: string;
   sol: any;
 
   usuarioId = null;
   solicitudes: Solicitud[];
+
+  horas: number[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +86,8 @@ export class SolicitudPage implements OnInit {
     this.fecha = this.datePipe.transform(this.route.snapshot.params['fecha'], "yyyy-MM-dd");
     this.salaId = this.route.snapshot.params['salaId'];
     this.solicitudId = this.route.snapshot.params['solicitudId'];
+    this.inicio = this.route.snapshot.params['inicio'];
+    this.termino = this.route.snapshot.params['termino'];
     this.afAuth.authState.subscribe(user => {
       if (user){
         console.log("User ID: "+user.uid);
@@ -120,7 +129,7 @@ export class SolicitudPage implements OnInit {
         console.log(doc.id,' => ', doc.data());
         loading.dismiss();
         if(this.solicitudId != ''){
-          this.loadSolicitudId();
+          ///this.loadSolicitudId();
         } else {
           this.loadSolicitud();
         }
@@ -128,7 +137,7 @@ export class SolicitudPage implements OnInit {
     });
   }
 
-  loadSolicitudId() {
+  /*loadSolicitudId() {
     console.log("Solicitud: "+this.solicitudId);
     var result = this.db.collection('solicitudes').ref.where('id','==',this.solicitudId);
     result.get().then((res) => {
@@ -142,31 +151,67 @@ export class SolicitudPage implements OnInit {
         console.log(doc.id,' => ', doc.data());
       });
     });
-  }
+  }*/
 
   loadSolicitud() {
     console.log("solicitud: ");
     this.solicitud.fecha = this.fecha;
     console.log("Fechaaaaaaaaaaaaaaaaaaqwwwwwww: "+this.solicitud.fecha);
+
+    this.fechaValidate = new Date('2021-01-01T'+this.inicio+':00.789');
+    this.horaInicio = this.fechaValidate.toISOString();
+    this.fechaValidate = new Date('2021-01-01T'+this.termino+':00.789');
+    this.horaTermino = this.fechaValidate.toISOString();
     this.solicitud.sala = this.salaId;
     this.solicitud.nombre = this.usuario.nombre+" "+this.usuario.apellido;
     this.solicitud.usuario = this.usuarioId;
     this.solicitud.espacio = this.sala.nombre;
-    this.solicitud.estatus = 1;
+    this.solicitud.estatus = '1';
+    var hora = new Date(this.horaTermino.toString()).getHours();
+    console.log(hora);
+    this.getHoras();
+  }
+
+  getHoras(){
+
+    var hora = new Date(this.horaTermino.toString()).getHours();
+
+    this.fechaValidate = new Date('2021-01-01T'+this.sala.termino+':00.789');
+
+    var horaFin = new Date(this.fechaValidate.toString()).getHours();
+
+    while (hora <= horaFin) {
+      this.horas.push(hora);
+      hora++;
+    }
+
+    console.log(this.horas);
+
+    
+
   }
 
   validateSolicitud() {
     console.log("Validar horas i");
-    this.solicitud.inicio = this.horaInicio.toString();
-    this.solicitud.termino = this.horaTermino.toString();
+
+    var min = new Date(this.horaInicio.toString()).getMinutes() === 0 ? '00' : new Date(this.horaInicio.toString()).getMinutes().toString();
+    this.solicitud.inicio = new Date(this.horaInicio.toString()).getHours()+':'+min;
+
+    min = new Date(this.horaTermino.toString()).getMinutes() === 0 ? '00' : new Date(this.horaTermino.toString()).getMinutes().toString();
+    this.solicitud.termino = new Date(this.horaTermino.toString()).getHours()+':'+min;
+
+    ///this.solicitud.inicio = new Date(this.horaInicio.toString()).getHours()+':00';
+    //this.solicitud.termino = new Date(this.horaTermino.toString()).getHours()+':00';
+    //this.solicitud.inicio = this.horaInicio.toString();
+    //this.solicitud.termino = this.horaTermino.toString();
     this.solicitud.fecha = this.fecha;
     console.log("Validar horas i: "+this.solicitud.inicio);
     console.log("Validar horas t: "+this.solicitud.termino);
     var horasInicio = this.db.collection('solicitudes').ref.where('fecha','==',this.solicitud.fecha)
                                                            .where('sala','==',this.solicitud.sala)
-                                                           .where('estatus','==',1)
-                                                           .where('inicio','>',this.solicitud.inicio)
-                                                           .where('inicio','<',this.solicitud.termino);
+                                                           .where('estatus','==','1')
+                                                           .where('inicio','==',this.solicitud.inicio)
+                                                           .where('inicio','==',this.solicitud.termino);
     horasInicio.get().then((res) => {
       if (res.size  > 0) {
         res.forEach( (doc) => {
@@ -187,9 +232,9 @@ export class SolicitudPage implements OnInit {
     console.log("Validar horas t");
     var horasTermino = this.db.collection('solicitudes').ref.where('fecha','==',this.solicitud.fecha)
                                                             .where('sala','==',this.solicitud.sala)
-                                                            .where('estatus','==',1)
-                                                            .where('termino','>',this.solicitud.inicio)
-                                                            .where('termino','<',this.solicitud.termino);
+                                                            .where('estatus','==','1')
+                                                            .where('termino','==',this.solicitud.inicio)
+                                                            .where('termino','==',this.solicitud.termino);
     horasTermino.get().then((res) => {
       if (res.size  > 0) {
         console.log("Las horas seleccionadas no estan disponibles, seleccionar otras! termino: "+res.size);
@@ -219,12 +264,15 @@ export class SolicitudPage implements OnInit {
       message: 'Saving.....'
     });
     await loading.present();
+    if (this.sala.autorizacion === '1') {
+      this.solicitud.estatus = '2';
+    }
     this.solicitudesServiceValidate.addSolicitud(this.solicitud).then((sol) => {
       loading.dismiss();
       console.log("Exito solicitud guardada");
       console.log("Solicitud guardar: "+sol.id);
       this.updateSolicitud(sol.id);
-      this.nav.navigateForward('/reservar-sala');
+      this.nav.navigateForward('/home-usuario');
     });
   }
 
@@ -232,8 +280,34 @@ export class SolicitudPage implements OnInit {
     this.solicitud.id = id;
     this.solicitudesServiceValidate.updateSolicitud(this.solicitud,id).then(() => {
       console.log("Exito solicitud actualizada");
-      this.nav.navigateForward('/reservar-sala');
+      if (this.sala.autorizacion === '1') {
+        this.presentAlertSolicitudAutorizacion();
+      } else {
+        this.presentAlertSolicitudAutorizacionAutomatica();
+      }
+      this.nav.navigateForward('/home-usuario');
     });
   }
 
+  async presentAlertSolicitudAutorizacion() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Solicitud creada',
+      subHeader: '',
+      message: 'Ha seleccionado una sala que requiere autorizacion, favor de comunicarse con el administrador!.',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  
+  async presentAlertSolicitudAutorizacionAutomatica() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Solicitud creada',
+      subHeader: '',
+      message: 'Se ha creado y autorizado la solicitud automaticamente!.',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }

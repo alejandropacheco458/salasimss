@@ -7,7 +7,8 @@ export interface Solicitud {
   fecha: string;
   inicio: string;
   termino: string;
-  estatus: number;
+  estatus: string;
   proposito: string;
   materiales: string;
+  observaciones: string;
 }

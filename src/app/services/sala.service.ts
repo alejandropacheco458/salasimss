@@ -36,4 +36,12 @@ export class SalaService {
   getSala(id: string){
     return this.salasCollection.doc<Sala>(id).valueChanges();
   }
+
+  updateSala(sala: Sala, id: string) {
+    return this.salasCollection.doc(id).update(sala);
+  }
+
+  addSala(sala: Sala) {
+    return this.salasCollection.add(sala);
+  }
 }

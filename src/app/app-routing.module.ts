@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'usuario/:id',
+    path: 'usuario/:id/:vista',
     loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule),
     canActivate: [AuthGuard]
   },
@@ -52,10 +52,77 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'solicitud/:fecha/:salaId/:solicitudId',
+    path: 'solicitud/:fecha/:salaId/:solicitudId/:inicio/:termino',
     loadChildren: () => import('./pages/solicitud/solicitud.module').then( m => m.SolicitudPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'salas',
+    loadChildren: () => import('./pages/salas/salas.module').then( m => m.SalasPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'sala/:id',
+    loadChildren: () => import('./pages/sala/sala.module').then( m => m.SalaPageModule)
+  },
+  {
+    path: 'cursos',
+    loadChildren: () => import('./pages/cursos/cursos.module').then( m => m.CursosPageModule)
+  },
+  {
+    path: 'curso/:id',
+    loadChildren: () => import('./pages/curso/curso.module').then( m => m.CursoPageModule)
+  },
+  {
+    path: 'solicitud-edicion/:fecha/:salaId/:solicitudId',
+    loadChildren: () => import('./pages/solicitud-edicion/solicitud-edicion.module').then( m => m.SolicitudEdicionPageModule)
+  },
+  {
+    path: 'solicitud-cancelar/:fecha/:salaId/:solicitudId',
+    loadChildren: () => import('./pages/solicitud-cancelar/solicitud-cancelar.module').then( m => m.SolicitudCancelarPageModule)
+  },
+  {
+    path: 'solicitudes-autorizar',
+    loadChildren: () => import('./pages/solicitudes-autorizar/solicitudes-autorizar.module').then( m => m.SolicitudesAutorizarPageModule)
+  },
+  {
+    path: 'cursos-consulta',
+    loadChildren: () => import('./pages/cursos-consulta/cursos-consulta.module').then( m => m.CursosConsultaPageModule)
+  },
+  {
+    path: 'curso-consulta/:id',
+    loadChildren: () => import('./pages/curso-consulta/curso-consulta.module').then( m => m.CursoConsultaPageModule)
+  },
+  {
+    path: 'register-complete',
+    loadChildren: () => import('./pages/register-complete/register-complete.module').then( m => m.RegisterCompletePageModule)
+  },
+  {
+    path: 'usuarios-autorizar',
+    loadChildren: () => import('./pages/usuarios-autorizar/usuarios-autorizar.module').then( m => m.UsuariosAutorizarPageModule)
+  },
+  {
+    path: 'sala-edicion/:id',
+    loadChildren: () => import('./pages/sala-edicion/sala-edicion.module').then( m => m.SalaEdicionPageModule)
+  },
+  {
+    path: 'solicitudes-usuario',
+    loadChildren: () => import('./pages/solicitudes-usuario/solicitudes-usuario.module').then( m => m.SolicitudesUsuarioPageModule)
+  },
+  {
+    path: 'solicitud-consulta/:fecha/:salaId/:solicitudId',
+    loadChildren: () => import('./pages/solicitud-consulta/solicitud-consulta.module').then( m => m.SolicitudConsultaPageModule)
   }
+
+
+
+
+
+
+
+
+
+
 ];
 
 @NgModule({

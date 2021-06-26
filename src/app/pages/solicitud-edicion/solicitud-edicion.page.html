@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Solicitud</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list lines="full">
+      <ion-item *ngIf="solicitud">
+        <ion-label>Fecha:</ion-label>
+        <ion-input disabled tupe="text" placeholder="Fecha" [(ngModel)]="solicitud.fecha"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="solicitud">
+        <ion-label>Sala:</ion-label>
+        <ion-input disabled tupe="text" placeholder="Sala" [(ngModel)]="solicitud.espacio"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="solicitud">
+        <ion-label>Nombre:</ion-label>
+        <ion-input disabled tupe="text" placeholder="Nombre" [(ngModel)]="solicitud.nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora inicio:</ion-label>
+        <ion-datetime disabled displayFormat="HH:mm" placeholder="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora termino:</ion-label>
+        <ion-datetime disabled displayFormat="HH:mm" placeholder="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Proposito:</ion-label>
+        <ion-input disabled  [(ngModel)]="solicitud.proposito"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Materiales:</ion-label>
+        <ion-textarea disabled [(ngModel)]="solicitud.materiales"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estatus:</ion-label>
+        <ion-select placeholder="Solicitada" value="1" [(ngModel)]="solicitud.estatus">
+          <ion-select-option value="1">Autorizar</ion-select-option>
+          <ion-select-option value="3">Rechazar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Observaciones:</ion-label>
+        <ion-textarea [(ngModel)]="solicitud.observaciones"></ion-textarea>
+      </ion-item>
+  </ion-list>
+  <ion-button expand="full" color="success" (click)="updateSolicitud()">Guardar</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  </ion-fab>
+</ion-content>

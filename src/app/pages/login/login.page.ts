@@ -7,6 +7,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -35,10 +36,18 @@ export class LoginPage implements OnInit {
     private usuarioService: UsuarioService,
     private afAuth: AngularFireAuth,
     public alertController: AlertController,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private http: HttpClient
   ) { }
 
   ngOnInit() { // Primer metodo que se ejecuta al iniciar una pagina
+    this.afAuth.credential;
+    this.afAuth.signOut().then(() => {
+      console.log("Se cerro sesion ");
+      this.afAuth.credential;
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onLogin(){
@@ -68,7 +77,8 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl('/home-usuario');
           }
         } else {
-            this.presentAlert();
+          this.afAuth.credential;
+          this.presentAlert();
         }
       });
     });

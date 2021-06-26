@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
     email: '',
     curp: '',
     numeroControl: '',
-    status: "2",
+    status: "3",
     rol: 2
   }
 
@@ -40,44 +40,22 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  async onRegister(){
-    const user = await this.authService.onRegister(this.user);
-    if (user) {
+  register() {
 
-      console.log('Exito aqui mandar a guardar a la base de usuarios');
+  }
 
-      const loading = await this.loadingController.create({
-        message: 'Saving.....'
-      });
-
-      await loading.present();
-
-
-
-
-      this.afAuth.authState.subscribe(user => {
-        if (user){
-          console.log("User ID: "+user.uid);
-
-
-          this.usuario.id = user.uid;
-          this.usuarioService.addUsuario(user.uid,this.usuario).then(() => {
-            loading.dismiss();
-          });
-
+  onRegister(){
+    this.authService.onRegister(this.user).then ( user => {
+      if (user.user) {
+        console.log('Exito aqui mandar a guardar a la base de usuarios');
+        this.usuario.id = user.user.uid;
+        this.usuarioService.addUsuario(user.user.uid,this.usuario).then(() => {
           console.log('Exito se guardo nuevo usuario en tabla usuario');
-          this.presentAlert();
-          this.router.navigateByUrl('/login');
-          ///this.usuarioId = user.uid;
-          //this.loadUsuario();
-        }
-        else{
-
-        }
-     })
-
-
-    }
+          this.router.navigateByUrl('/register-complete');
+        }); 
+      }
+    })
+    
   }
 
   async presentAlert() {

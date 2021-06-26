@@ -12,27 +12,27 @@
 <ion-content padding>
   <ion-list lines="full">
       <ion-item *ngIf="usuario">
-        <ion-label>Nombre</ion-label>
+        <ion-label><b>Nombre:</b></ion-label>
         <ion-input required type="text" placeholder="Usuario" [(ngModel)]="usuario.nombre"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-label>Apellido</ion-label>
+        <ion-label><b>Apellido:</b></ion-label>
         <ion-input required type="text" placeholder="apellido" [(ngModel)]="usuario.apellido"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-label>Email</ion-label>
+        <ion-label><b>Email:</b></ion-label>
         <ion-input required disabled type="text" placeholder="email" [(ngModel)]="usuario.email"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-label>CURP</ion-label>
+        <ion-label><b>CURP:</b></ion-label>
         <ion-input required type="text" placeholder="CURP" [(ngModel)]="usuario.curp"></ion-input>
       </ion-item>
       <ion-item *ngIf="usuario">
-        <ion-label>Numero IMSS</ion-label>
+        <ion-label><b>Numero IMSS:</b></ion-label>
         <ion-input required type="text" placeholder="numero IMSS" [(ngModel)]="usuario.numeroControl"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Estatus</ion-label>
+        <ion-label><b>Estatus:</b></ion-label>
         <ion-select  value="1" [(ngModel)]="usuario.status">
           <ion-select-option value="1">Activo</ion-select-option>
           <ion-select-option value="2">Inactivo</ion-select-option>

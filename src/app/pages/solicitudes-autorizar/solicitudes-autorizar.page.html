@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Solicitudes por Autorizar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let solicitud of solicitudes">
+      <ion-item lines="inset" [routerLink]="['/solicitud-edicion', solicitud.fecha, solicitud.sala, solicitud.id]">
+        <ion-label>
+          <h2>{{ solicitud.inicio+" - "+solicitud.termino }}</h2>
+          <h3>{{ solicitud.nombre }}</h3>
+          <p>{{ solicitud.espacio+" : "+solicitud.proposito }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

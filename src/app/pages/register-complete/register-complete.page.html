@@ -1,0 +1,21 @@
+<ion-header size="large">
+  <ion-toolbar color="secondary">
+    <ion-title>Reservar salas IMSS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Usuario creado</ion-card-subtitle>
+      <ion-card-title>Inactivo</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      El usuario ha sido creado, favor de contactar al administrador para activar su acceso.
+    </ion-card-content>
+    
+  </ion-card>
+  <ion-button expand="full" (click)="onLogOut()" color="success">Aceptar</ion-button>
+</ion-content>

@@ -12,37 +12,32 @@
 <ion-content>
 
   <ion-item>
-    <ion-label>Fecha</ion-label>
+    <ion-label><b>Fecha:</b></ion-label>
     <ion-datetime [(ngModel)]="fecha"
                   placeholder="yyyy-mm-dd"
                   display-format="YYYY MMMM DD"
-                  min="2021-01-01"
+                  min="2021-01-01" 
+                  (ionChange)="onChangeFechaSala()"
                   ></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label>Salas</ion-label>
-    <ion-select [(ngModel)]="sala">
+    <ion-label><b>Sala:</b></ion-label>
+    <ion-select [(ngModel)]="sala"  (ionChange)="onFindSolicitudes()">
       <ion-select-option *ngFor="let sala of salas" [value]="sala">
         {{sala.nombre + ' ' + sala.capacidad}}
       </ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button expand="full" (click)="onFindSolicitudes()">Buscar Disponibilidad</ion-button>
   <ion-list>
     <ion-item-sliding *ngFor="let solicitud of solicitudes">
-      <ion-item lines="inset" [routerLink]="['/solicitud', fecha, sala.id, solicitud.id]">
+      <ion-item lines="inset" (click)="onValidarUsuario(solicitud.estatus,solicitud.usuario,solicitud.id,solicitud.inicio,solicitud.termino)">
         <ion-label>
           <h2>{{ solicitud.inicio+" - "+solicitud.termino }}</h2>
           <h3>{{ solicitud.nombre }}</h3>
-          <p>{{ solicitud.proposito }}</p>
+          <p [ngClass]="{si: solicitud.proposito == 'Disponible', no: solicitud.proposito != 'Disponible'}">{{ solicitud.proposito }}</p>
         </ion-label>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success"  [routerLink]="['/solicitud', fecha, sala.id, '']" routerDirection="forward">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

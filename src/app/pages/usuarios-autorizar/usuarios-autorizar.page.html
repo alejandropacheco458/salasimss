@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button>
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let usuario of usuarios">
+      <ion-item lines="inset" button [routerLink]="['/usuario', usuario.id, '2']">
+        <ion-label>
+          <h2>{{ usuario.nombre+" "+usuario.apellido }}</h2>
+          <h3>{{ usuario.numeroControl }}</h3>
+          <p>{{ usuario.email }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
